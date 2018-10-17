@@ -1,0 +1,3 @@
+language: generic
+notifications:
+  webhooks: https://travis-sms-notification.glitch.me/notifications
