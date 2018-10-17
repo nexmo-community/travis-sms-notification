@@ -9,6 +9,7 @@ const API_SECRET = process.env.NEXMO_API_SECRET;
 const NEXMO_NUMBER = process.env.NEXMO_NUMBER;
 const NOTIFICATION_NUMBER = process.env.NOTIFICATION_NUMBER;
 const REPOSITORIES = process.env.REPOSITORIES.split(',');
+const TRAVIS_CONFIG_URL = process.env.TRAVIS_CONFIG_URL;
 
 const nexmo = new Nexmo({
     apiKey: API_KEY,
@@ -35,7 +36,7 @@ server.route({
 });
 
 async function verifyRequest(request) {
-    const response = await Axios.get('https://api.travis-ci.org/config')
+    const response = await Axios.get(TRAVIS_CONFIG_URL);
 
     const travisPublicKey = response.data.config.notifications.webhook.public_key;
     const travisSignature = Buffer.from(request.headers.signature, 'base64');
